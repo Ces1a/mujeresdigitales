@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EJERCICIO DOM JS</title>
+    <style>
+        body {
+            background-color: rgba(250, 156, 67, 0.507);
+            color: rgb(136, 14, 160);
+            margin: 5rem;
+        }
+        .parrafo1{
+           font-size: 25px;
+           color: rgb(221, 24, 211); 
+           font-weight: bold;
+        }
+        .parrafo2{
+            font-size: medium;
+            color: rgb(207, 31, 184);
+            font-weight: 20px;
+        }
+        button{
+            padding: 500;
+            border-radius: 1 rem;
+            font-size: 15px;
+            color: black;
+            background-color: rgb(195, 195, 207);
+            font-weight: 200;
+            font-style: oblique;
+            float: right;
+            border-radius: 1rem;
+        }
+
+        .respuesta {
+             margin: 10px 0;
+            font-size: larger;
+            font-weight: lighter;
+        }
+        #mibotton { display: none;
+         }
+    </style>
+</head>
+<body>
+    <header>
+        <h1 id="miparrafo" class="parrafo1">Adivina, adivinador</h1>
+        <p id="miparrafo2" class="parrafo2">¿Qué le dijo un pollito a otro pollito?</p>
+
+        <div class="respuesta">
+            <input type="text" id="respuestaInput" placeholder="Escribe tu respuesta aquí">
+        </div>
+    </header>
+    <section>
+        <button id="mibotton"> 
+            <h6>Are you sure?</h6>
+        </button>
+    </section>
+
+    <script>
+
+        const botton= document.getElementById("mibotton");
+        const parrafo2= document.getElementById("miparrafo2");
+        const texto= "Los pollos no hablan "
+
+        respuestaInput.addEventListener("input", function() {
+            if (respuestaInput.value.trim() !== "") {  
+            botton.style.display = "block";
+        } else {
+            botton.style.display = "none";
+        }
+        });
+
+        botton.addEventListener("click", function() {
+        const respuestaSeleccionada = respuestaInput.value.trim();
+        
+            parrafo2.innerHTML = '¡Caiste! ' + texto;
+            parrafo2.style.color = "green";
+            parrafo2.style.fontSize = "30px";
+         });
+        
+    </script>
+</body>
+</html>
+
+
+
+
+
