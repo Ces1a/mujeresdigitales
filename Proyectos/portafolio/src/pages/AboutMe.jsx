@@ -3,10 +3,6 @@ import React from 'react'
 export const AboutMe = () => {
 return (
     <div> 
-        <div>
-        <button className='Button'>Contact me
-        </button>
-        </div>
         <div className='tarjeta'>
             <p>Soy estudiante de Biología apasionado por la intersección entre la ciencia y la tecnología. Me interesa especialmente la bioinformática y cómo los datos pueden transformar nuestra comprensión del mundo natural.
 
