@@ -8,8 +8,13 @@ export const Home = () => {
     };
 
     return (
+
         <div className='Home'>
-            <div className='nombre'>Cesia Alejandra Pajaro Contreras</div>
+            <div className='foto'>
+                <img  className= 'imagen' src="../src/assets/Lab.jpg" alt="imagenpresentación" />
+            </div>
+            <div className='nombre'>
+                <h1>Cesia Alejandra Pajaro Contreras</h1></div>
             <div>
                 {!showInput && (
                     <button className='Button' onClick={handleContactClick}>
