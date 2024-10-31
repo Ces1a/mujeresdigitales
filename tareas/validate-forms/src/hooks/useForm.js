@@ -1,9 +1,12 @@
 import { useState } from "react";
 
-export const useForms = () => {
+export const useForms = (ValorDefecto,validaciones) => {
     const [form, setForm] = useState(ValorDefecto);
     const [errores, serErrores] = useState({});
-    const [cargado, setCargando] = useState(false)
+    const [cargado, setCargando] = useState(false);
+    const [bd, setBd] = useState();
+    const [respuesta, setRespuesta] = useState(false);
+
 
 
     const manejadorCambios = (element) => {
@@ -13,43 +16,53 @@ export const useForms = () => {
             [name]: value
         })
 
-        console.log(form)
+        // console.log(form)
     };
 
     const maejadorSalidaInput = (element) => {
         manejadorCambios(element)
-        serErrores(validaciones(form))
-    }
+        serErrores(validaciones(form));
+    };
 
     const enviarFormulario = (element) => {
         element.preventDefault();
-        serErrores(validaciones(form))
+        serErrores(validaciones(form));
 
         if (Object.keys(errores).length === 0) {
             setCargando(true)
             try {
-                const status = axios.post('/api/falsa/usuario',{
-                    body: form
-                })
-                if (status === 201) {
-                    console.log('se ha guardado exitosamente')
+                // const status = axios.post('/api/falsa/usuario',{
+                //     body: form
+                // })
+                // if (status === 201) {
+                //     console.log('se ha guardado exitosamente')
+                //     setCargando(false)
+                // }else{
+                //     return
+                // }
+
+
+                setTimeout(() => {
+                    setBd(form)
                     setCargando(false)
-                }else{
-                    return
-                }
+                    setRespuesta(true)
+                }, 2000);
+
             } catch (error) {
-                console.log('ocurrio un error al guardar')
+                setRespuesta(false);
+                console.log('ocurrio un error al guardar');
             }
         } else {
             return;
         }
-    }
-
+    };
 
     return {
         form,
         errores,
         cargado,
+        bd,
+        respuesta,
         manejadorCambios,
         maejadorSalidaInput,
         enviarFormulario

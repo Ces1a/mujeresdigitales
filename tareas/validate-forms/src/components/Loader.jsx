@@ -1,7 +1,7 @@
 import React from "react";
-import './loader.css'
+import '../../src/index.css'
 
-export const loader = () => {
+export const Loader = () => {
 return
 <>
 <div className="lds-spinner">

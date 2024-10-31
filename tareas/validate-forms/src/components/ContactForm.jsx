@@ -1,6 +1,8 @@
 import React from "react";
 import { useForms } from "../hooks/useForm";
-
+import "../../src/index.css";
+import {Loader} from "./Loader"
+import Main from "./Main";
 
 const valorDefecto = {
     nombre: "",
@@ -10,18 +12,18 @@ const valorDefecto = {
     extra: "",
 };
 
-const validaciones = () => {
+const validaciones = (form) => {
     let regexEmail = /^(\w+[/./-]?){1,}@[a-z]+[/.]\w{2,6}$/;
     let regexComments = /^.{1,255}$/;
 
-    let erroresFormulario = {}
+    let erroresFormulario = {};
 
     if (!form.nombre.trim()) {
         erroresFormulario.nombre = "no puedes dejar este campo vacio"
     }
     if (!form.email.trim()) {
         erroresFormulario.email = "no puedes dejar este campo vacio"
-    } else if (!regexEmail.test(form.nombre.trim())) {
+    } else if (!regexEmail.test(form.email.trim())) {
         erroresFormulario.email = "no reconoce el correo"
     }
     if (!form.tel.trim()) {
@@ -36,78 +38,84 @@ const validaciones = () => {
         erroresFormulario.extra = "este campo debe tener min 1 caracter y max 255"
     }
 
-    return erroresFormulario
+    return erroresFormulario;
 
-}
+};
 
 const ContactForm = () => {
-    const { form, errores, cargado, manejadorCambios, maejadorSalidaInput, enviarFormulario } = useForms(valorDefecto, validaciones)
-}
+    const { form, errores, cargado, bd, respuesta, manejadorCambios, maejadorSalidaInput, enviarFormulario }
+        = useForms(valorDefecto, validaciones);
 
 
-return (
-    <>
-        <h1>Formulario de contacto</h1>
-        <form onSubmit={enviarFormulario}>
-            <p>nombre</p>
-            <input
-                type="text"
-                name="nombre"
-                placeholder="Escribe Aquí tu nombre"
-                required
-                value={form.nombre}
-                onChange={manejadorCambios}
-                onBlur={maejadorSalidaInput}
-            />
-            {errores.nombre && <p className="p-error">{errores.nombre}</p>}
-            <p>email</p>
-            <input
-                type="email"
-                name="email"
-                placeholder="Escribe Aquí tu email"
-                required
-                value={form.email}
-                onChange={manejadorCambios}
-                onBlur={maejadorSalidaInput}
-            />
-            {errores.email && <p className="p-error">{errores.email}</p>}
-            <p>number</p>
-            <input
-                type="number"
-                name="tel"
-                placeholder="Escribe Aquí tu número de contacto"
-                required
-                value={form.tel}
-                onChange={manejadorCambios}
-                onBlur={maejadorSalidaInput}
-            />
-            {errores.email && <p className="p-error">{errores.email}</p>}
-            <p>informacion</p>
-            <input
-                type="text"
-                name="informacion"
-                placeholder="Escribe Aquí qué habilidades puedes aportarnos"
-                required
-                value={form.informacion}
-                onChange={manejadorCambios}
-                onBlur={maejadorSalidaInput}
-            />
-            {errores.informacion && <p className="p-error">{errores.informacion}</p>}
-            <p>extra</p>
-            <tarea
-                name="extra"
-                placeholder="Escribe Aquí"
-                required
-                cols={30}
-                rows={5}
-                value={form.extra}
-                onChange={manejadorCambios}
-                onBlur={maejadorSalidaInput}
-            />
-            {errores.extra && <p className="p-error">{errores.extra}</p>}
-            <input type="submit" value="subir" disabled={cargado} className={cargado ? 'deshabilitado' : ''}/>
-        </form>
-        {cargado &&  <Loader/>}
-    </>
-);
+
+    return (
+        <>
+            <h1>Formulario de contacto</h1>
+            <form onSubmit={enviarFormulario}>
+                <p>nombre</p>
+                <input
+                    type="text"
+                    name="nombre"
+                    placeholder="Escribe Aquí tu nombre"
+                    required
+                    value={form.nombre}
+                    onChange={manejadorCambios}
+                    onBlur={maejadorSalidaInput}
+                />
+                {errores.nombre && <p className="p-error">{errores.nombre}</p>}
+                <p>email</p>
+                <input
+                    type="email"
+                    name="email"
+                    placeholder="Escribe Aquí tu email"
+                    required
+                    value={form.email}
+                    onChange={manejadorCambios}
+                    onBlur={maejadorSalidaInput}
+                />
+                {errores.email && <p className="p-error">{errores.email}</p>}
+                <p>number</p>
+                <input
+                    type="number"
+                    name="tel"
+                    placeholder="Escribe Aquí tu número de contacto"
+                    required
+                    value={form.tel}
+                    onChange={manejadorCambios}
+                    onBlur={maejadorSalidaInput}
+                />
+                {errores.email && <p className="p-error">{errores.tel}</p>}
+                <p>informacion</p>
+                <input
+                    type="text"
+                    name="informacion"
+                    placeholder="Escribe Aquí qué habilidades puedes aportarnos"
+                    required
+                    value={form.informacion}
+                    onChange={manejadorCambios}
+                    onBlur={maejadorSalidaInput}
+                />
+                {errores.informacion && <p className="p-error">{errores.informacion}</p>}
+                <p>extra</p>
+                <input
+                    name="extra"
+                    placeholder="Escribe Aquí"
+                    required
+                    cols={30}
+                    rows={5}
+                    value={form.extra}
+                    onChange={manejadorCambios}
+                    onBlur={maejadorSalidaInput}
+                />
+                {errores.extra && (<p className="p-error">{errores.extra}</p>)}
+                <input type="submit" value="subir" disabled={cargado} className={cargado ? 'deshabilitado' : ''} />
+            </form>
+            {cargado && <Loader/>}
+            {respuesta && <Main datos={bd} />}
+        </>
+
+    );
+};
+
+
 export default ContactForm;
