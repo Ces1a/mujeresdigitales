@@ -119,6 +119,7 @@
 }
 
 .Home {
+    background-image: url('../src/assets/fondoPortafiolio.jpg');
     padding: 24.9rem
 }
 
@@ -170,6 +171,7 @@
     box-sizing: border-box;
     background-size: cover;
     background-position: left;
+    background-image: url('../src/assets/fondoPortafiolio.jpg');
 }
 .job {
     background-color: #c0cfc1;
@@ -199,3 +201,6 @@
     height: 35%;
 }
 
+.aboutme {
+background-image: url('../src/assets/fondoPortafiolio.jpg');
+}

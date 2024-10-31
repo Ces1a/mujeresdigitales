@@ -2,7 +2,7 @@ import React from 'react'
 
 export const AboutMe = () => {
 return (
-    <div> 
+    <div className='aboutme'> 
         <div className='tarjeta'>
             <p>Soy estudiante de Biología apasionado por la intersección entre la ciencia y la tecnología. Me interesa especialmente la bioinformática y cómo los datos pueden transformar nuestra comprensión del mundo natural.
 
