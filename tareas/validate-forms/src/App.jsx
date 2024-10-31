@@ -11,7 +11,7 @@ function App() {
         <ContactForm/>
       </div>
     </>
-  );
+  )
 }
 
 export default App
